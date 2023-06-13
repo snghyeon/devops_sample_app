@@ -3,6 +3,7 @@
 
 name: CI For Sample Python application
 
+# 워크플로 구문
 on:
   workflow_dispatch:
   pull_request:
@@ -10,6 +11,7 @@ on:
       - main
     types: [closed]
 
+# CI git action file 내에 정의하는 환경변수
 env:
   # Organization Secrets
   AWS_ACCESS_KEY_ID: ${{ secrets.PERSONAL_AWS_ACCESS_KEY_ID }}
