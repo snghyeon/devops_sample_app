@@ -22,12 +22,13 @@ env:
   CLUSTER_NAME: demodapne2-abcd
   NAMESPACE: default
   APP_NAME: sample-app
-  
+
+# 핵심
 jobs:  
-  build:
+  build: # stage; 각 stage 추가 가능
     if: ${{ github.event.pull_request.merged }}
     runs-on: ubuntu-latest
-    steps:
+    steps: # step
       - name: Checkout Src
         uses: actions/checkout@v3
 
@@ -66,7 +67,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: sample-app
           IMAGE_TAG: ${{ steps.vars.outputs.sha_short }}
-        run: |
+        run: | # 도커 build and push
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         
